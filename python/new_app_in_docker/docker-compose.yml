@@ -1,7 +1,19 @@
 version: '3'
 services:
   db:
-    image: 
+    image: mongo:7.0-rc-jammy
+    ports: 
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 
+      MONGO_INITDB_ROOT_PASSWORD: 
+      MONGO_INITDB_DATABASE: database
 
   app:
-    image:
+    image: app:v1
+    build: ./app
+    ports: 
+      - "8080:8080"
+    environment:
+      MONGODB_USERNAME: 
+      MONGODB_PASSWORD:
