@@ -5,9 +5,10 @@ services:
     ports: 
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: 
-      MONGO_INITDB_ROOT_PASSWORD: 
+      MONGO_INITDB_ROOT_USERNAME: #####
+      MONGO_INITDB_ROOT_PASSWORD: #####
       MONGO_INITDB_DATABASE: database
+
 
   app:
     image: app:v1
@@ -15,5 +16,7 @@ services:
     ports: 
       - "8080:8080"
     environment:
-      MONGODB_USERNAME: 
-      MONGODB_PASSWORD:
+      MONGODB_USERNAME: #####
+      MONGODB_PASSWORD: #####
+    depends_on:
+      - db
