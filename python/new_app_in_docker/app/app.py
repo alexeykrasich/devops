@@ -7,7 +7,7 @@ app = Flask(__name__)
 mongodb_username = os.environ.get('MONGODB_USERNAME')
 mongodb_password = os.environ.get('MONGODB_PASSWORD')
 
-mongo_uri = f'mongodb://{mongodb_username}:{mongodb_password}@localhost:27017/'
+mongo_uri = f'mongodb://{mongodb_username}:{mongodb_password}@db:27017/'
 
 client = MongoClient(mongo_uri)
 db = client['database'] 
@@ -41,4 +41,4 @@ def update_data(key):
 
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app.run(port=8080, host='0.0.0.0', debug=True)
