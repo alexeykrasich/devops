@@ -1,6 +1,12 @@
+###----------------------------------------------------
+#-Owner: Alexey Krasichonak
+#-Discription: Get request - show table, POST - add an object, PUT - eddit an object
+###----------------------
+
 import os
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
+from bson import ObjectId
 
 app = Flask(__name__)
 
@@ -30,11 +36,12 @@ def add_data():
         return jsonify({"error": "No data provided"}), 400
 
 
-@app.route('/data/<key>', methods=['PUT'])
-def update_data(key):
+@app.route('/data/<id>', methods=['PUT'])
+def update_data(id):
     req_data = request.get_json()
     if req_data:
-        collection.update_one({"key": key}, {"$set": req_data})
+        document_id = ObjectId(id)
+        collection.update_one({"_id": document_id}, {"$set": req_data})
         return jsonify({"message": "Data updated successfully"}), 200
     else:
         return jsonify({"error": "No data provided"}), 400
@@ -42,3 +49,5 @@ def update_data(key):
 
 if __name__ == '__main__':
     app.run(port=8080, host='0.0.0.0', debug=True)
+
+
